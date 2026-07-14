@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f3157">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles.css">
+<title>Mithu Carpet Inventory</title>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <div class="brand">MITHU CARPET</div>
+  <div class="subtitle">Hamayetpur Warehouse Inventory</div>
+  <div class="statusbar">
+    <div class="pill" id="metaCount">Inventory</div>
+    <div class="pill">Hamayetpur Warehouse</div>
+    <div class="pill">Read only</div>
+  </div>
+</div></header>
+<main>
+<section class="card search-card">
+  <div class="search-row">
+    <input id="q" class="search" autocomplete="off" placeholder="Product name বা code লিখুন — যেমন BDG">
+    <button id="clearBtn" class="clear-btn">Clear</button>
+  </div>
+  <div class="helper">টাইপ করার সঙ্গে সঙ্গে matching list আসবে। Product-এ একবার চাপুন।</div>
+  <div id="results" class="results"></div>
+</section>
+<section id="detail" class="card detail-card">
+  <div class="detail-head"><div class="detail-title">Product Details</div><button id="copyBtn" class="copy-btn">Copy</button></div>
+  <div class="grid">
+    <div class="label">Product Name</div><div id="dName" class="value"></div>
+    <div class="label">Product Code</div><div id="dCode" class="value"></div>
+    <div class="label">Category</div><div id="dCategory" class="value"></div>
+    <div class="label">Size</div><div id="dSize" class="value"></div>
+    <div class="label">Unit</div><div id="dUnit" class="value"></div>
+    <div class="label">Available Stock</div><div id="dStock" class="value stock"></div>
+    <div class="label">Shop Price</div><div id="dPrice" class="value"></div>
+    <div class="label">Location</div><div id="dLocation" class="value"></div>
+  </div>
+</section>
+</main>
+<div class="footer">Read-only inventory system • Mithu Carpet</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
