@@ -10,3 +10,8 @@ q.addEventListener('input',render);q.addEventListener('keydown',e=>{if(e.key==='
 $('clearBtn').onclick=clearAll;function clearAll(){q.value='';results.style.display='none';detail.style.display='none';current=null;q.focus()}
 $('copyBtn').onclick=async()=>{if(!current)return;const text=`${current.name}\nCode: ${current.code||'-'}\nCategory: ${current.category||'-'}\nSize: ${current.size||'-'}\nUnit: ${current.unit||'-'}\nStock: ${current.stock||0}\nLocation: ${current.location||'Hamayetpur Warehouse'}`;await navigator.clipboard.writeText(text);$('copyBtn').textContent='Copied';setTimeout(()=>$('copyBtn').textContent='Copy',1200)};
 //if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(registrations => {
+    registrations.forEach(registration => registration.unregister());
+  });
+}
