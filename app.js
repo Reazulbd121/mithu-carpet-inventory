@@ -9,4 +9,4 @@ function move(step){const els=[...document.querySelectorAll('.result')];if(!els.
 q.addEventListener('input',render);q.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();move(1)}if(e.key==='ArrowUp'){e.preventDefault();move(-1)}if(e.key==='Enter'&&active>=0){e.preventDefault();show(currentMatches[active])}if(e.key==='Escape')clearAll()});
 $('clearBtn').onclick=clearAll;function clearAll(){q.value='';results.style.display='none';detail.style.display='none';current=null;q.focus()}
 $('copyBtn').onclick=async()=>{if(!current)return;const text=`${current.name}\nCode: ${current.code||'-'}\nCategory: ${current.category||'-'}\nSize: ${current.size||'-'}\nUnit: ${current.unit||'-'}\nStock: ${current.stock||0}\nLocation: ${current.location||'Hamayetpur Warehouse'}`;await navigator.clipboard.writeText(text);$('copyBtn').textContent='Copied';setTimeout(()=>$('copyBtn').textContent='Copy',1200)};
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+//if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
