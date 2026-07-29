@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650">
+  <rect width="1000" height="650" fill="#eef3f8"/>
+  <rect x="315" y="150" width="370" height="280" rx="28" fill="#ffffff" stroke="#b9c8d9" stroke-width="12"/>
+  <circle cx="430" cy="250" r="45" fill="#d8e1eb"/>
+  <path d="M350 390l110-105 75 72 62-60 53 93z" fill="#b9c8d9"/>
+  <text x="500" y="510" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#667085">No Product Image</text>
+  <text x="500" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#667085">Mithu Carpet</text>
+</svg>

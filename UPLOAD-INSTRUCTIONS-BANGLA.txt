@@ -1,0 +1,26 @@
+MITHU CARPET WEBSITE — SAFE UPDATE STEPS
+
+1. ZIP ফাইল Extract করুন।
+2. GitHub repository-এর root-এ নিচের ফাইল/ফোল্ডার Upload করে Replace করুন:
+   index.html
+   app.js
+   styles.css
+   sw.js
+   manifest.webmanifest
+   data.js
+   images (পুরো folder)
+
+3. GitHub commit শেষ হওয়ার পর 1-3 মিনিট অপেক্ষা করুন।
+4. Website প্রথমবার এইভাবে খুলুন:
+   https://reazulbd121.github.io/mithu-carpet-inventory/?v=20260729-img2
+5. এরপর Ctrl + F5 চাপুন।
+6. নিচে “Image v2” লেখা দেখলে update সফল হয়েছে।
+
+ছবি রাখার নিয়ম:
+- Code থাকলে: images/BG-01.jpg
+- Code না থাকলে: images/Classic 2x3.jpg
+- jpg, jpeg, png, webp সমর্থিত।
+
+গুরুত্বপূর্ণ:
+Excel-এ Photo column লাগবে না।
+Publish Website করলে data.js update হবে; images folder-এর ছবি আলাদাভাবে GitHub-এ থাকবে।

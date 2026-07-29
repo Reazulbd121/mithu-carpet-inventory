@@ -1,50 +1,19 @@
-const CACHE = "mithu-inventory-v3";
-
-const STATIC_ASSETS = [
-  "./",
-  "index.html",
-  "styles.css",
-  "app.js",
-  "manifest.webmanifest"
-];
-
+// Service worker retirement file.
+// This removes old cached website files so GitHub Pages updates appear correctly.
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(STATIC_ASSETS))
-  );
-
   self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE)
-          .map(key => caches.delete(key))
-      )
-    )
-  );
-
-  self.clients.claim();
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.map(key => caches.delete(key)));
+    await self.registration.unregister();
+    const clients = await self.clients.matchAll({ type: "window" });
+    clients.forEach(client => client.navigate(client.url));
+  })());
 });
 
 self.addEventListener("fetch", event => {
-  const url = new URL(event.request.url);
-
-  // data.js সবসময় Internet/GitHub/Netlify থেকে নতুন করে নেবে
-  if (url.pathname.endsWith("/data.js")) {
-    event.respondWith(
-      fetch(event.request, { cache: "no-store" })
-        .catch(() => caches.match(event.request))
-    );
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      return cachedResponse || fetch(event.request);
-    })
-  );
+  event.respondWith(fetch(event.request));
 });
