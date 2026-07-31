@@ -53,6 +53,12 @@ function slugBase(value) {
 }
 function productBases(x) {
   const raw = [];
+  if (x.category && x.code) {
+    raw.push(
+      safeBase(`${x.category} ${x.code}`),
+      slugBase(`${x.category} ${x.code}`)
+    );
+  }
   if (x.code) raw.push(safeBase(x.code), slugBase(x.code));
   if (x.name) raw.push(safeBase(x.name), slugBase(x.name));
   return [...new Set(raw.filter(Boolean))];
