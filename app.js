@@ -53,14 +53,25 @@ function slugBase(value) {
 }
 function productBases(x) {
   const raw = [];
-  if (x.category && x.code) {
-    raw.push(
-      safeBase(`${x.category} ${x.code}`),
-      slugBase(`${x.category} ${x.code}`)
-    );
+
+  // Correct image lookup priority:
+  // 1) Product Name + Product Code
+  // 2) Category + Product Code
+  // 3) Product Code
+  // 4) Product Name
+  if (x.name && x.code) {
+    const nameCode = `${x.name} ${x.code}`;
+    raw.push(safeBase(nameCode), slugBase(nameCode));
   }
+
+  if (x.category && x.code) {
+    const categoryCode = `${x.category} ${x.code}`;
+    raw.push(safeBase(categoryCode), slugBase(categoryCode));
+  }
+
   if (x.code) raw.push(safeBase(x.code), slugBase(x.code));
   if (x.name) raw.push(safeBase(x.name), slugBase(x.name));
+
   return [...new Set(raw.filter(Boolean))];
 }
 function encodePathPart(value) {
@@ -109,23 +120,77 @@ async function findNumberedSeries(base, folderMode, token) {
   }
   return found;
 }
-async function findProductImages(x, token) {
+async function findNumberedSeriesFrom(base, folderMode, token, startNumber = 1) {
   const found = [];
+  let consecutiveMisses = 0;
 
-  // পুরোনো single-image নিয়ম আগে দেখা হয়।
-  const legacyChecks = await Promise.all(singleImageCandidates(x).map(testImage));
-  legacyChecks.forEach(url => { if (url && !found.includes(url)) found.push(url); });
-  if (token !== imageLoadToken) return [];
-
-  // নতুন numbered ও folder নিয়ম। দুইটি ধারাবাহিক নম্বর না পাওয়া গেলে search থামে।
-  for (const base of productBases(x)) {
-    const numbered = await findNumberedSeries(base, false, token);
-    numbered.forEach(url => { if (!found.includes(url)) found.push(url); });
-    const folder = await findNumberedSeries(base, true, token);
-    folder.forEach(url => { if (!found.includes(url)) found.push(url); });
+  for (
+    let n = startNumber;
+    n <= MAX_NUMBERED_IMAGES && consecutiveMisses < 2;
+    n++
+  ) {
     if (token !== imageLoadToken) return [];
+
+    const image = await firstWorkingImage(
+      numberedImageCandidates(base, n, folderMode),
+      token
+    );
+
+    if (image) {
+      found.push(image);
+      consecutiveMisses = 0;
+    } else {
+      consecutiveMisses++;
+    }
   }
+
   return found;
+}
+
+async function findProductImages(x, token) {
+  // Priority অনুযায়ী একেকটি base পরীক্ষা করা হয়।
+  // কোনো base-এ ছবি পাওয়া গেলেই নিচের fallback আর পরীক্ষা করা হয় না,
+  // তাই আগের তুলনায় ছবি দ্রুত আসে।
+  for (const base of productBases(x)) {
+    if (token !== imageLoadToken) return [];
+
+    const encoded = encodePathPart(base);
+    const singleCandidates = IMAGE_EXTENSIONS.map(ext => `images/${encoded}.${ext}`);
+
+    const [single, numberedFirst, folderFirst] = await Promise.all([
+      firstWorkingImage(singleCandidates, token),
+      firstWorkingImage(numberedImageCandidates(base, 1, false), token),
+      firstWorkingImage(numberedImageCandidates(base, 1, true), token)
+    ]);
+
+    if (token !== imageLoadToken) return [];
+
+    if (single || numberedFirst || folderFirst) {
+      const found = [];
+
+      if (single) found.push(single);
+
+      if (numberedFirst) {
+        found.push(numberedFirst);
+        const numberedRest = await findNumberedSeriesFrom(base, false, token, 2);
+        numberedRest.forEach(url => {
+          if (!found.includes(url)) found.push(url);
+        });
+      }
+
+      if (folderFirst) {
+        if (!found.includes(folderFirst)) found.push(folderFirst);
+        const folderRest = await findNumberedSeriesFrom(base, true, token, 2);
+        folderRest.forEach(url => {
+          if (!found.includes(url)) found.push(url);
+        });
+      }
+
+      return found;
+    }
+  }
+
+  return [];
 }
 function setMainImage(index, openModal = false) {
   if (!currentImages.length) return;
@@ -183,12 +248,17 @@ async function loadProductImages(x) {
 
   img.classList.remove('is-loading');
   if (!images.length) {
-    currentImages = [DEFAULT_IMAGE];
+    currentImages = [];
     currentImageIndex = 0;
     img.src = DEFAULT_IMAGE;
     img.dataset.full = DEFAULT_IMAGE;
+    $('photoGallery').style.display = 'block';
+    $('photoCounter').textContent = '';
+    $('photoPrev').style.display = 'none';
+    $('photoNext').style.display = 'none';
+    $('photoThumbs').style.display = 'none';
+    $('photoThumbs').innerHTML = '';
     hint.textContent = 'এই প্রোডাক্টের ছবি এখনো যোগ করা হয়নি';
-    updateGalleryUI();
     return;
   }
 
