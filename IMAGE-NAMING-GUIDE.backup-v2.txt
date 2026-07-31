@@ -1,0 +1,23 @@
+MITHU CARPET — PRODUCT IMAGE RULE
+
+1) সব ছবি images ফোল্ডারে রাখুন।
+
+2) Product Code থাকলে ছবির নাম Code অনুযায়ী রাখুন:
+   BG-01.jpg
+   HG-02.png
+
+3) Code না থাকলে Product Name অনুযায়ী রাখুন:
+   Classic 2x3.jpg
+   Almaya 2x4.jpg
+
+4) ছোট অক্ষর ও ড্যাশ ব্যবহার করলেও সিস্টেম চেষ্টা করবে:
+   classic-2x3.jpg
+   bg-01.jpg
+
+5) Supported format:
+   .jpg  .jpeg  .png  .webp
+
+6) একই Code একাধিক আলাদা Product-এ থাকলে Code-এর ছবিই আগে দেখাবে।
+   আলাদা ছবি প্রয়োজন হলে ঐ Product-এর Code অবশ্যই unique করতে হবে।
+
+7) Excel-এ Photo column লাগবে না।

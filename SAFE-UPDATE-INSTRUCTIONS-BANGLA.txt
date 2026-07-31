@@ -1,0 +1,19 @@
+MITHU CARPET WEBSITE — SAFE UPDATE নিয়ম
+
+এই Version-এ data.js এবং Inventory structure পরিবর্তন করা হয়নি। শুধু Image Gallery যোগ করা হয়েছে।
+
+Upload করার আগে:
+1) বর্তমান live website-এর backup/download রাখুন।
+2) আপনার সর্বশেষ data.js আলাদা করে copy রাখুন।
+3) নতুন package-এর app.js, index.html, styles.css, sw.js, manifest.webmanifest upload করুন।
+4) images ফোল্ডার merge করুন; পুরোনো ছবি delete করবেন না।
+5) data.js upload করার প্রয়োজন নেই, যদি live data.js-তেই সর্বশেষ In/Out update থাকে।
+6) Upload শেষে browser-এ Ctrl + F5 চাপুন।
+
+সবচেয়ে নিরাপদ পদ্ধতি:
+- প্রথমে Test/Preview site-এ upload করুন।
+- Search, Stock, In/Out data এবং Image পরীক্ষা করুন।
+- ঠিক থাকলে Live site-এ একই ফাইল দিন।
+
+Rollback:
+কোনো সমস্যা হলে backup-v2 ফাইলগুলো ব্যবহার করে আগের version ফেরত নেওয়া যাবে।

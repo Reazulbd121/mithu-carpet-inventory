@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f3157">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="styles.css?v=20260730-gallery1">
+<link rel="stylesheet" href="styles.css?v=20260729-img2">
 <title>Mithu Carpet Inventory</title>
 </head>
 <body>
@@ -31,15 +31,9 @@
   <div class="detail-head"><div class="detail-title">Product Details</div><button id="copyBtn" class="copy-btn">Copy</button></div>
 
   <div class="product-photo-wrap">
-    <div id="photoGallery" class="photo-gallery">
-      <button id="photoPrev" class="gallery-nav gallery-prev" type="button" aria-label="আগের ডিজাইন">‹</button>
-      <button id="photoBtn" class="photo-button" type="button" aria-label="ছবি বড় করে দেখুন">
-        <img id="dPhoto" class="product-photo" src="images/no-image.svg" alt="Product image">
-      </button>
-      <button id="photoNext" class="gallery-nav gallery-next" type="button" aria-label="পরের ডিজাইন">›</button>
-      <div id="photoCounter" class="photo-counter"></div>
-    </div>
-    <div id="photoThumbs" class="photo-thumbs" aria-label="Product designs"></div>
+    <button id="photoBtn" class="photo-button" type="button" aria-label="ছবি বড় করে দেখুন">
+      <img id="dPhoto" class="product-photo" src="images/no-image.svg" alt="Product image">
+    </button>
     <div id="photoHint" class="photo-hint">ছবিতে চাপলে বড় করে দেখা যাবে</div>
   </div>
 
@@ -59,14 +53,12 @@
 
 <div id="imageModal" class="image-modal" aria-hidden="true">
   <button id="modalClose" class="modal-close" type="button" aria-label="Close">×</button>
-  <button id="modalPrev" class="modal-nav modal-prev" type="button" aria-label="আগের ডিজাইন">‹</button>
   <img id="modalImage" class="modal-image" src="images/no-image.svg" alt="Large product image">
-  <button id="modalNext" class="modal-nav modal-next" type="button" aria-label="পরের ডিজাইন">›</button>
   <div id="modalCaption" class="modal-caption"></div>
 </div>
 
-<div class="footer">Read-only inventory system • Mithu Carpet • Image Gallery v2.1</div>
-<script src="data.js?v=20260730-live1"></script>
-<script src="app.js?v=20260730-gallery1"></script>
+<div class="footer">Read-only inventory system • Mithu Carpet • Image v2</div>
+<script src="data.js?v=20260729-img2"></script>
+<script src="app.js?v=20260729-img2"></script>
 </body>
 </html>
