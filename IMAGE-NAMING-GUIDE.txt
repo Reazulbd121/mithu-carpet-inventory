@@ -1,32 +1,36 @@
-MITHU CARPET — PRODUCT IMAGE & MULTI-DESIGN RULE (v2.1)
+MITHU CARPET — PRODUCT IMAGE RULE (CATEGORY + CODE)
 
-সব ছবি images ফোল্ডারে রাখুন। Excel/data.js-এ Photo column লাগবে না।
+সব ছবি images ফোল্ডারে রাখবেন। Excel/data.js-এ Photo column লাগবে না।
 
-A) একটি মাত্র ছবি থাকলে (পুরোনো নিয়ম — এখনও কাজ করবে):
-   BG-01.jpg
-   HG-02.png
+ছবি খোঁজার Priority:
+1) Category + Product Code
+2) Product Code
+3) Product Name
 
-B) একই Product Code-এর একাধিক Design থাকলে সবচেয়ে সহজ নিয়ম:
-   BG-01-1.jpg
-   BG-01-2.jpg
-   BG-01-3.jpg
-   ... সর্বোচ্চ 30টি পর্যন্ত
+উদাহরণ — একই Code দুই Category-তে থাকলে:
+images/Carpet Tiles BG-01.jpg
+images/Prayer Carpet BG-01.jpg
 
-C) চাইলে Folder নিয়মও ব্যবহার করা যাবে:
-   images/BG-01/1.jpg
-   images/BG-01/2.jpg
-   images/BG-01/3.jpg
+Category + Code ছবি না থাকলে পুরোনো Code ছবি কাজ করবে:
+images/BG-01.jpg
 
-D) Code না থাকলে Product Name দিয়েও একই নিয়ম:
-   Classic 2x3.jpg
-   Classic 2x3-1.jpg
-   Classic 2x3-2.jpg
+Code না থাকলে Product Name:
+images/Classic 2x3.jpg
 
-E) Supported format:
-   .jpg  .jpeg  .png  .webp
+একাধিক Design:
+images/Carpet Tiles BG-01-1.jpg
+images/Carpet Tiles BG-01-2.jpg
+images/Carpet Tiles BG-01-3.jpg
 
-গুরুত্বপূর্ণ:
-1) একই Code-এর সব Design একই নামের ধারাবাহিক নম্বরে দিন।
-2) নম্বর 1 থেকে শুরু করুন; মাঝখানে নম্বর বাদ না দেওয়াই ভালো।
-3) data.js, In/Out update বা Excel structure পরিবর্তন করার দরকার নেই।
-4) Website update করার সময় সম্পূর্ণ নতুন ZIP upload করুন; পুরোনো data.js ভুল করে overwrite করবেন না।
+অথবা Folder:
+images/Carpet Tiles BG-01/1.jpg
+images/Carpet Tiles BG-01/2.jpg
+
+Supported:
+.jpg .jpeg .png .webp
+
+নোট:
+- নম্বর 1 থেকে শুরু করবেন।
+- মাঝখানে নম্বর বাদ না দেওয়াই ভালো।
+- পুরোনো Code/Name অনুযায়ী ছবিও চলবে।
+- data.js, Stock, In/Out বা Search logic পরিবর্তন করা হয়নি।
